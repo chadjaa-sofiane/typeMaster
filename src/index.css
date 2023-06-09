@@ -1,0 +1,39 @@
+:root {
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: auto;
+  max-width: 38rem;
+  padding: 2rem;
+}
+
+
+
+.keyboard {
+  display: table;
+  width: 80%
+}
+
+.key {
+  display: table-cell;
+  width: 2em;
+  height: 2em;
+  border-style: solid;
+  border-radius: .3em;
+  border-color: blue;
+  border-width: 1px;
+}
+
+.active{
+  border-color: green;
+}

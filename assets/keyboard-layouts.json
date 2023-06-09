@@ -1,0 +1,25 @@
+{
+    "ISO": {
+        "alpha_numerics": [
+            "`1234567890-=",
+            "qwertyuiop[]",
+            "asdfghjkl;'\\",
+            "\\zxcvbnm,./"
+        ],
+        "last_row":[
+            "ControlLeft", "MetaLeft","AltLeft","Space","AltRight","ControlRight"
+        ],
+        "special_keys_first":[
+        [],
+        ["Tab"],
+        ["CapsLock"],
+        ["ShiftLeft"]
+        ],
+        "special_keys_last":[
+        ["Backspace"],
+        [],
+        ["Enter"],
+        ["ShiftRight"]
+        ]
+    }
+}
