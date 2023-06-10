@@ -39,6 +39,11 @@ body {
   border-width: 1px;
   text-align: center;
   padding: .3em;
+
+  font-family: Geneva, sans-serif;
+  font-weight: 500;
+
+  transition: all .2s linear;
 }
 
 .key+.key{
