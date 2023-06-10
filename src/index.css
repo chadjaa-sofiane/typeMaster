@@ -13,27 +13,48 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
   margin: auto;
-  max-width: 38rem;
   padding: 2rem;
 }
 
 
 
 .keyboard {
-  display: table;
-  width: 80%
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+}
+
+.keyboardrow{
+  display: flex;
 }
 
 .key {
-  display: table-cell;
-  width: 2em;
-  height: 2em;
+  display: block;
+  min-width: 2em;
+  min-height: 2em;
+  
   border-style: solid;
   border-radius: .3em;
   border-color: blue;
   border-width: 1px;
+  text-align: center;
+  padding: .3em;
+}
+
+.key+.key{
+  margin-left: .25em;
+
+}
+
+.keyboardrow + .keyboardrow{
+  margin-top: .2em;
 }
 
 .active{
   border-color: green;
+  background-color: lightgreen;
+}
+
+.special-key-Space{
+  min-width: 12em;
 }

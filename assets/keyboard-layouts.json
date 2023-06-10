@@ -6,6 +6,12 @@
             "asdfghjkl;'\\",
             "\\zxcvbnm,./"
         ],
+        "alpha_numerics_alt":[
+            "~!@#$%^&*()_+",
+            "QWERTYUIOP{}",
+            "ASDFGHJKL:\"|",
+            "|ZXCVBNM<>?"
+        ],
         "last_row":[
             "ControlLeft", "MetaLeft","AltLeft","Space","AltRight","ControlRight"
         ],
