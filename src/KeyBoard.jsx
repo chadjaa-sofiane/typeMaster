@@ -45,6 +45,7 @@ const KeyBoard = () => {
 }, []);
 
 const handleKeyDown= (e) => {
+    console.log(e)
     if(e.code === 'CapsLock'){
         setCapsLock(capsLock => !capsLock)
     }

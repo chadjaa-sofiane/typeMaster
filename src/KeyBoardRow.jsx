@@ -10,7 +10,9 @@ const KeyBoardRow = (props) => {
     return (
         <div className="keyboardrow">
             {props.row.map( (key, index) => 
-                <Key keychar={key}/>
+
+            // props of react components dont re render (or update the props value) on props change unless a key prop is present
+                <Key key={key} keychar={key}/>
             )}
         </div>
     );
