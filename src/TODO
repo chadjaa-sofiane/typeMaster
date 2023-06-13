@@ -1,0 +1,1 @@
+-make shift keydown a variable shared between child components using react context, so u can render the components diffrent depending on wether shift is press or not
