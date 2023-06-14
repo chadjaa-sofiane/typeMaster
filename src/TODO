@@ -1,1 +1,5 @@
--make shift keydown a variable shared between child components using react context, so u can render the components diffrent depending on wether shift is press or not
+-make shift keydown a variable shared between child components using react context, so u can render the components diffrent depending on wether shift is press or not.
+
+-unpress all keys when alt tabbed, (reset to init state)
+
+- change render of special keys to render symbols instead of text
