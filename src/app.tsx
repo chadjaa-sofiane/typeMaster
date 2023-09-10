@@ -30,7 +30,7 @@ const router = createMemoryRouter([
 ],
 {
   initialEntries: ["/", "/practice"],
-  initialIndex: 1,
+  initialIndex: 0,
 }
 )
 

@@ -1,20 +1,24 @@
 @tailwind base;
 @tailwind components;
 
+@font-face {
+    font-family: "Jost";
+    src: local("Jost"), url("./assets/fonts/Jost.ttf") format("truetype");
+    font-weight: bold;
+}
+
 :root {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *,
 ::before,
 ::after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
-
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, sans-serif;
+    font-family: "Jost",
 }
 
 @tailwind utilities;
