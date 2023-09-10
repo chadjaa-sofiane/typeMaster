@@ -27,7 +27,12 @@ const router = createMemoryRouter([
     element: <Practice/>,
     errorElement: <Error/>
   }
-])
+],
+{
+  initialEntries: ["/", "/practice"],
+  initialIndex: 1,
+}
+)
 
 const root = createRoot(document.getElementById("root"));
 root.render(
