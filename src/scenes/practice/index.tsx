@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Navbar from "src/components/Navbar";
 
 function Practice() {
@@ -7,7 +7,7 @@ function Practice() {
         <div className="font-jost">
             <Navbar />
             <div>
-                <p>Welcome to the practice page !</p>
+                <Outlet/>
             </div>
         </div>
     );
