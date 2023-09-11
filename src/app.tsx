@@ -6,6 +6,7 @@ import { createMemoryRouter, RouterProvider} from "react-router-dom";
 import './index.css'
 import Home from "./scenes/Home";
 import Practice from "./scenes/practice";
+import Tutorial from "src/scenes/tutorial";
 import Error from "./scenes/Error";
 
 /*
@@ -25,6 +26,11 @@ const router = createMemoryRouter([
   {
     path: "/practice",
     element: <Practice/>,
+    errorElement: <Error/>
+  },
+  {
+    path: "/tutorial",
+    element: <Tutorial/>,
     errorElement: <Error/>
   }
 ],

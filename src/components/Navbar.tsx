@@ -13,7 +13,7 @@ function Navbar() {
                     navigate(-1);
                 }}
             >
-                <BsChevronLeft className="w-8 h-8 bg-secondary text-black rounded-2xl hover:rounded transition-all relative left-0" />
+                <BsChevronLeft className="w-8 h-8 bg-secondary text-black rounded-2xl hover:text-accent hover:scale-110 hover:shadow-surround hover:shadow-accent transition-all relative left-0" />
             </button>
             <div className="flex grow justify-center gap-4">
                 <StyledLink link="/mainmenu" title="Main Menu" />

@@ -5,6 +5,7 @@ function MainMenu() {
     return (
             <div className='flex flex-col grow w-1/3 bg-primary p-4 gap-4 rounded justify-center items-center'>
                 <MenuLink title="Practice" link={"/practice"}/>
+                <MenuLink title="Tutorial" link={"/tutorial"}/>
             </div>
 
     );
