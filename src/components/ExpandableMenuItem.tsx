@@ -10,7 +10,7 @@ function ExpandableMenuItem({items, title}: ExpandableMenuItemProps) {
         <div className='flex flex-col bg-secondary rounded'>
             <button
             onClick={()=>{setOpened((opened)=>!opened);}}
-            className='flex justify-center items-center text-2xl p-2 min-w-[9em] bg-secondary rounded hover:scale-110 hover:shadow-surround hover:shadow-accent  hover:text-accent'
+            className='flex justify-center items-center text-2xl p-2 min-w-[20em] bg-secondary rounded hover:scale-110 hover:shadow-surround hover:shadow-accent  hover:text-accent'
             >
                 {<span className='grow'>{title}</span>}
                 {opened? <BsChevronDown/> : <BsChevronRight/>}

@@ -42,8 +42,8 @@ const router = createMemoryRouter(
     },
   ],
   {
-    initialEntries: ["/", "/practice"],
-    initialIndex: 0,
+    initialEntries: ["/", "/practice","/practice/character"],
+    initialIndex: 2,
   }
 );
 

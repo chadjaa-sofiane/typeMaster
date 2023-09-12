@@ -5,7 +5,7 @@ import MenuLink from "src/components/MenuLink";
 
 function MainMenu() {
   return (
-    <div className="flex flex-col grow w-1/3 bg-primary p-4 gap-4 rounded justify-center items-center">
+    <div className="flex flex-col grow bg-primary p-4 gap-4 rounded justify-center items-center">
       <ExpandableMenuItem
         title={"Practice"}
         items={[
