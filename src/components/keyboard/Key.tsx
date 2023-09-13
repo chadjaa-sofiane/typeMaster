@@ -29,58 +29,71 @@ const Key = ({keychar}: KeyProps) => {
     
     //TODO add a className property to each of the entries in this special keys icons obj
     // use tailwind classes to set the style of each key and include by interpolating it into the tag
-                   const special_keys_icons = [
+                   const special_keys_props = [
         {
             key: "AltLeft",
-            icon: AltLeft
+            icon: AltLeft,
+            className: `w-[1em]`
         },
         {
             key: "AltRight",
-            icon: AltRight
+            icon: AltRight,
+            className: `w-[1em]`
         }
         ,
         {
             key: "Backspace",
-            icon: Backspace
+            icon: Backspace,
+            className: `grow`
         },
         {
             key: "CapsLock",
-            icon: CapsLock
+            icon: CapsLock,
+            className: `grow`
         },
         {
             key: "ControlLeft",
-            icon: ControlLeft
+            icon: ControlLeft,
+            className: `w-[1em]`
         },
         {
             key: "ControlRight",
-            icon: ControlRight
+            icon: ControlRight,
+            className: `w-[1em]`
         },
         {
             key: "Enter",
-            icon: Enter
+            icon: Enter,
+            className: `w-[1em]`
         },
         {
             key: "MetaLeft",
-            icon: MetaLeft
+            icon: MetaLeft,
+            className: `w-[1em]`
         },
         {
             key: "ShiftLeft",
-            icon: ShiftLeft
+            icon: ShiftLeft,
+            className: `grow`
         },
         {
             key: "ShiftRight",
-            icon: ShiftRight
+            icon: ShiftRight,
+            className: `grow`
         },
         {
             key: "Space",
-            icon: Space
+            icon: Space,
+            className: 'grow'
         },
         {
             key: "Tab",
-            icon: Tab
+            icon: Tab,
+            className: `grow`
         }
     ]
 
+    const current_key = special_keys_props.find(obj=>obj.key===keychar)
     const handleKeyDown= (event: KeyboardEvent)=>{
         if(event.repeat){return}
         if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
@@ -121,11 +134,13 @@ const Key = ({keychar}: KeyProps) => {
         { `
             relative flex flex-col justify-center items-center w-fit h-fit bg-secondary border border-primary rounded-lg text-sm
             ${isDown && `scale-110 text-accent shadow-surround shadow-accent ${isCorrect? 'bg-green-700' : 'bg-red-700'}`}
-             `}
+            ${special_keys.includes(keychar) && current_key.className
+            }
+            `}
               id={keychar}>
             {
             (special_keys.includes(keychar)
-            ? <div className="flex justify-center items-center p-[1em]"><img className="h-[1em] w-[1em]" src={special_keys_icons.find(obj=>obj.key===keychar).icon}/></div>
+            ? <div className="flex justify-center items-center p-[1em]"><img className={`h-[1em] w-[1em]`} src={current_key.icon}/></div>
             : <div className="flex justify-center items-center p-[1em]"><span className="flex justify-center items-center w-[1em] h-[1em]">{keychar}</span></div>)
             }
             {

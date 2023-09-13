@@ -6,7 +6,7 @@ const KeyBoardRow = ({row}: KeyBoardRowProps) => {
     
 
     return (
-        <div className="flex gap-[.1rem]">
+        <div className="flex gap-[.1rem] w-full">
             {row.map( (key, index) => 
 
             // props of react components dont re render (or update the props value) on props change unless a key prop is present

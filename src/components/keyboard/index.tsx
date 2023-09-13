@@ -35,7 +35,7 @@ useEffect(()=>{
     else{
         return (
 
-            <div className="flex flex-col gap-1" id="keyboard">
+            <div className="flex flex-col gap-1 w-fit" id="keyboard">
             {
                 key_set.map( (row, index) => <KeyBoardRow row={row} />)
             }
