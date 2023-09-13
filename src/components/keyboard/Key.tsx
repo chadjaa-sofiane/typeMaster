@@ -22,6 +22,8 @@ const Key = ({keychar}: KeyProps) => {
     const [isDown, setIsDown] = useState(false)
     const [isCorrect, setIsCorrect] = useState(true)
 
+    // will set the size of the keyboard
+    const [fontSize, setFontSize] = useState('lg');
     const special_keys =   qwertyLayout["special_keys_first"].flat(1)
                    .concat(qwertyLayout["special_keys_last"].flat(1))
                    .concat(qwertyLayout["last_row"])
@@ -132,7 +134,7 @@ const Key = ({keychar}: KeyProps) => {
 
         <div className=
         { `
-            relative flex flex-col justify-center items-center w-fit h-fit bg-secondary border border-primary rounded-lg text-sm
+            relative flex flex-col justify-center items-center w-fit h-fit bg-secondary border border-primary rounded-lg text-${fontSize}
             ${isDown && `scale-110 text-accent shadow-surround shadow-accent ${isCorrect? 'bg-green-700' : 'bg-red-700'}`}
             ${special_keys.includes(keychar) && current_key.className
             }
@@ -140,12 +142,12 @@ const Key = ({keychar}: KeyProps) => {
               id={keychar}>
             {
             (special_keys.includes(keychar)
-            ? <div className="flex justify-center items-center p-[1em]"><img className={`h-[1em] w-[1em]`} src={current_key.icon}/></div>
-            : <div className="flex justify-center items-center p-[1em]"><span className="flex justify-center items-center w-[1em] h-[1em]">{keychar}</span></div>)
+            ? <div className="p-[.75em]"><img className={`h-[1em] w-[1em]`} src={current_key.icon}/></div>
+            : <div className="p-[.75em]"><span className="flex justify-center items-center w-[1em] h-[1em]">{keychar}</span></div>)
             }
             {
             (keychar === 'f' || keychar === 'F' || keychar === 'j' || keychar === 'J')
-            ? <span className="absolute top-[0.75rem] flex justify-center items-center text-2xl">_</span>
+            ? <span className={`absolute top-[1em] flex justify-center items-center text-${fontSize}`}>_</span>
             : <></>
             } 
 
