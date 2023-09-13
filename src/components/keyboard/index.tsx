@@ -8,16 +8,12 @@ const Keyboard = () => {
     const {rows, rows_alt} = qwertyKeySet;
 
     const [loading, setLoading] = useState(true)
-    const [capsLock, setCapsLock] = useState(false)
     const [key_set, setKeySet]= useState(rows)
     
 
 const handleKeyDownKeyboard= (event : KeyboardEvent) => {
-    event.stopPropagation()
-    console.log('caught keydown event in keyboard: ', event.code)
-    if(event.code === 'CapsLock'){
-        setCapsLock(capsLock => !capsLock)
-    }
+    event.stopPropagation();
+    console.log('caught keydown event in keyboard: ', event.code);
 }
 
 

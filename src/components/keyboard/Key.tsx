@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useContext, useCallback, useRef} from "react";
-import {qwertyLayout} from 'src/assets/keyboard-layouts'
+import {qwertyLayout} from 'src/assets/keyboard-layouts';
 import { qwertyKeySet } from "src/assets/iso_qwerty";
+import { useSelector, useDispatch } from "react-redux";
+
 // svg assets
 import Backspace from 'src/assets/keys/Backspace.svg'
 import CapsLock from 'src/assets/keys/CapsLock.svg'
@@ -14,13 +16,16 @@ import Space from 'src/assets/keys/Space.svg'
 import Tab from 'src/assets/keys/Tab.svg'
 import AltLeft from 'src/assets/keys/AltLeft.svg'
 import AltRight from 'src/assets/keys/AltRight.svg'
+import { RootState } from "src/redux/store";
 
 //import moveKeyById from "../controllers/moveKeyById.js";
 
 const Key = ({keychar}: KeyProps) => {
 
-    const [isDown, setIsDown] = useState(false)
-    const [isCorrect, setIsCorrect] = useState(true)
+    const [isDown, setIsDown] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(false);
+    const generatedChar = useSelector((state: RootState)=> state.generatedChar.value);
+    const dispatch = useDispatch();
 
     // will set the size of the keyboard
     const [fontSize, setFontSize] = useState('lg');
@@ -103,7 +108,14 @@ const Key = ({keychar}: KeyProps) => {
         }
         if(event.key === keychar || event.code === keychar){
             setIsDown(true);
+            if(generatedChar === keychar){
+                setIsCorrect(true);
+            }
+            console.log('generated char: ', generatedChar,' kechar: ',keychar)
+            console.log(generatedChar ===keychar);
+            console.log(isCorrect)
         }
+
     }
 
 
@@ -114,7 +126,7 @@ const Key = ({keychar}: KeyProps) => {
         }
 
         if(event.key === keychar || event.code === keychar){
-            setIsDown((isDown) => false)
+            setIsDown((isDown) => false);
         }
 
         
@@ -135,7 +147,7 @@ const Key = ({keychar}: KeyProps) => {
         <div className=
         { `
             relative flex flex-col justify-center items-center w-fit h-fit bg-secondary border border-primary rounded-lg text-${fontSize}
-            ${isDown && `scale-110 text-accent shadow-surround shadow-accent ${isCorrect? 'bg-green-700' : 'bg-red-700'}`}
+            ${isDown && `scale-110 text-white shadow-surround shadow-accent ${isCorrect? 'bg-green-500' : 'bg-red-500'}`}
             ${special_keys.includes(keychar) && current_key.className
             }
             `}

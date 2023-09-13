@@ -1,6 +1,8 @@
 import React, { Children, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "src/redux/store";
 
 import "./index.css";
 import Home from "./scenes/Home";
@@ -50,6 +52,8 @@ const router = createMemoryRouter(
 const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );
