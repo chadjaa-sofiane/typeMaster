@@ -11,11 +11,15 @@ const possible_chars =
 export interface generatedCharState {
   value: string,
   feedback: string,
+  total: number,
+  correct: number,
 }
 
 const initialState: generatedCharState = {
   value: possible_chars[Math.floor(Math.random() * possible_chars.length)],
   feedback: 'Type the generated character !',
+  total : 0,
+  correct: 0,
 }
 
 export const generatedCharSlice = createSlice({
@@ -27,10 +31,16 @@ export const generatedCharSlice = createSlice({
     },
     setFeedback: (state, action: PayloadAction<string>)=>{
       state.feedback = action.payload;
+    },
+    incrementTotal: (state)=>{
+      state.total = state.total + 1;
+    },
+    incrementCorrect: (state)=>{
+      state.correct = state.correct + 1;
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { generateChar, setFeedback} = generatedCharSlice.actions
+export const { generateChar, setFeedback, incrementTotal, incrementCorrect} = generatedCharSlice.actions
 export default generatedCharSlice.reducer

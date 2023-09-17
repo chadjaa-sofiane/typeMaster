@@ -17,7 +17,7 @@ import Tab from 'src/assets/keys/Tab.svg'
 import AltLeft from 'src/assets/keys/AltLeft.svg'
 import AltRight from 'src/assets/keys/AltRight.svg'
 import { RootState } from "src/redux/store";
-import { generateChar, setFeedback } from "src/redux/generatedCharSlice";
+import { generateChar, setFeedback, incrementTotal, incrementCorrect } from "src/redux/generatedCharSlice";
 
 //import moveKeyById from "../controllers/moveKeyById.js";
 
@@ -105,21 +105,21 @@ const Key = ({keychar}: KeyProps) => {
     const current_key = special_keys_props.find(obj=>obj.key===keychar)
     const handleKeyDown= (event: KeyboardEvent)=>{
         if(event.repeat){return}
-        if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
-            //setKeySet(qwertyKeySet.rows_alt)
-        }
+
         if(event.key === keychar || event.code === keychar){
+            dispatch(incrementTotal());
             setIsDown(true);
             if(generatedChar === keychar){
                 setIsCorrect(true);
+                dispatch(incrementCorrect());
                 dispatch(setFeedback("Great !"));
             }
             else{
                 dispatch(setFeedback("Try again !"));
             }
-            console.log('generated char: ', generatedChar,' kechar: ',keychar)
-            console.log(generatedChar == keychar);
-            console.log(isCorrect)
+            //console.log('generated char: ', generatedChar,' kechar: ',keychar)
+            //console.log(generatedChar == keychar);
+            //console.log(isCorrect)
         }
 
     }
@@ -127,9 +127,6 @@ const Key = ({keychar}: KeyProps) => {
 
     const handleKeyUp= (event: KeyboardEvent)=>{
 
-        if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
-            //setKeySet(qwertyKeySet.rows)
-        }
 
         if(event.key === keychar || event.code === keychar){
             setIsDown((isDown) => false);

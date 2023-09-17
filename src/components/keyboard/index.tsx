@@ -6,49 +6,35 @@ import {qwertyKeySet} from 'src/assets/iso_qwerty'
 const Keyboard = () => {
 
     const {rows, rows_alt} = qwertyKeySet;
-
     const [loading, setLoading] = useState(true)
     const [key_set, setKeySet]= useState(rows)
+
+    const keyboardHandleKeyDown= (event: KeyboardEvent)=>{
+        console.log(event.code)
+        if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
+            setKeySet(rows_alt);
+        }
+    }
     
-
-const handleKeyDownKeyboard= (event : KeyboardEvent) => {
-    event.stopPropagation();
-    console.log('caught keydown event in keyboard: ', event.code);
-}
-
-
-
+    
+    const keyboardHandleKeyUp= (event: KeyboardEvent)=>{
+        if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
+            setKeySet(rows);
+        }
+    }
 
 useEffect(()=>{   
     setLoading(false)
 },[]);
 
 useEffect(()=>{
-    window.addEventListener("keydown", handleKeyDown)
-    window.addEventListener("keyup", handleKeyUp)
+    window.addEventListener("keydown", keyboardHandleKeyDown)
+    window.addEventListener("keyup", keyboardHandleKeyUp)
     return ()=>{
-        window.removeEventListener("keydown", handleKeyDown)
-        window.removeEventListener("keyup", handleKeyUp)
+        window.removeEventListener("keydown", keyboardHandleKeyDown)
+        window.removeEventListener("keyup", keyboardHandleKeyUp)
     }
-
-})
-
-const handleKeyDown= (event: KeyboardEvent)=>{
-    if(event.repeat){return}
-    if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
-        setKeySet(rows_alt);
-    }
-}
-
-
-const handleKeyUp= (event: KeyboardEvent)=>{
-
-    if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
-        setKeySet(rows)
-    }
-    
-}
-
+},[])
 
     if(loading){
         return (<p>loading</p>)
