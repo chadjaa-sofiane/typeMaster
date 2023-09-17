@@ -18,6 +18,7 @@ import AltLeft from 'src/assets/keys/AltLeft.svg'
 import AltRight from 'src/assets/keys/AltRight.svg'
 import { RootState } from "src/redux/store";
 import { generateChar, setFeedback, incrementTotal, incrementCorrect } from "src/redux/generatedCharSlice";
+import { incrementCurrentIndex, pushCurrentTyped, pushCorrectChars } from "src/redux/generatedSentenceSlice";
 
 //import moveKeyById from "../controllers/moveKeyById.js";
 
@@ -27,6 +28,14 @@ const Key = ({keychar}: KeyProps) => {
     const [isCorrect, setIsCorrect] = useState(false);
     const generatedChar = useSelector((state: RootState)=> state.generatedChar.value);
     const feedback = useSelector((state: RootState)=> state.generatedChar.feedback);
+
+    //sentence
+    const generatedSentence = useSelector((state: RootState) => state.generatedSentence.value);
+    const currentIndex = useSelector((state: RootState) => state.generatedSentence.currentIndex);
+    const currentTyped = useSelector((state: RootState) => state.generatedSentence.currentTyped);
+    const correctChars = useSelector((state: RootState) => state.generatedSentence.correctChars);
+
+
     const dispatch = useDispatch();
 
     // will set the size of the keyboard
@@ -108,6 +117,8 @@ const Key = ({keychar}: KeyProps) => {
 
         if(event.key === keychar || event.code === keychar){
             dispatch(incrementTotal());
+            dispatch(incrementCurrentIndex());
+            dispatch(pushCurrentTyped(keychar));
             setIsDown(true);
             if(generatedChar === keychar){
                 setIsCorrect(true);
@@ -116,10 +127,19 @@ const Key = ({keychar}: KeyProps) => {
             }
             else{
                 dispatch(setFeedback("Try again !"));
+
+            }
+
+            if(generatedSentence[currentIndex] === keychar || generatedSentence[currentIndex] === event.key){
+                dispatch(pushCorrectChars(true));
+            }
+            else{
+                dispatch(pushCorrectChars(false));
             }
             //console.log('generated char: ', generatedChar,' kechar: ',keychar)
             //console.log(generatedChar == keychar);
             //console.log(isCorrect)
+            console.log(event.key);
         }
 
     }

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import generatedCharReducer from 'src/redux/generatedCharSlice';
+import generatedSentenceReducer from 'src/redux/generatedSentenceSlice';
 
 export const store = configureStore({
   reducer: {
     generatedChar: generatedCharReducer,
+    generatedSentence: generatedSentenceReducer
   },
 })
 
