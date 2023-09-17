@@ -17,6 +17,7 @@ import Tab from 'src/assets/keys/Tab.svg'
 import AltLeft from 'src/assets/keys/AltLeft.svg'
 import AltRight from 'src/assets/keys/AltRight.svg'
 import { RootState } from "src/redux/store";
+import { generateChar, setFeedback } from "src/redux/generatedCharSlice";
 
 //import moveKeyById from "../controllers/moveKeyById.js";
 
@@ -25,6 +26,7 @@ const Key = ({keychar}: KeyProps) => {
     const [isDown, setIsDown] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
     const generatedChar = useSelector((state: RootState)=> state.generatedChar.value);
+    const feedback = useSelector((state: RootState)=> state.generatedChar.feedback);
     const dispatch = useDispatch();
 
     // will set the size of the keyboard
@@ -110,9 +112,13 @@ const Key = ({keychar}: KeyProps) => {
             setIsDown(true);
             if(generatedChar === keychar){
                 setIsCorrect(true);
+                dispatch(setFeedback("Great !"));
+            }
+            else{
+                dispatch(setFeedback("Try again !"));
             }
             console.log('generated char: ', generatedChar,' kechar: ',keychar)
-            console.log(generatedChar ===keychar);
+            console.log(generatedChar == keychar);
             console.log(isCorrect)
         }
 
@@ -146,8 +152,8 @@ const Key = ({keychar}: KeyProps) => {
 
         <div className=
         { `
-            relative flex flex-col justify-center items-center w-fit h-fit bg-secondary border border-primary rounded-lg text-${fontSize}
-            ${isDown && `scale-110 text-white shadow-surround shadow-accent ${isCorrect? 'bg-green-500' : 'bg-red-500'}`}
+            relative flex flex-col justify-center items-center w-fit h-fit ${isDown? (isCorrect? 'bg-green-500' :'bg-red-500'): 'bg-secondary'} border border-primary rounded-lg text-${fontSize}
+            ${isDown && `scale-110 text-white shadow-surround shadow-accent`}
             ${special_keys.includes(keychar) && current_key.className
             }
             `}

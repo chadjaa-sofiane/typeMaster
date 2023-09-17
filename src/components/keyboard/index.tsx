@@ -23,6 +23,31 @@ useEffect(()=>{
     setLoading(false)
 },[]);
 
+useEffect(()=>{
+    window.addEventListener("keydown", handleKeyDown)
+    window.addEventListener("keyup", handleKeyUp)
+    return ()=>{
+        window.removeEventListener("keydown", handleKeyDown)
+        window.removeEventListener("keyup", handleKeyUp)
+    }
+
+})
+
+const handleKeyDown= (event: KeyboardEvent)=>{
+    if(event.repeat){return}
+    if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
+        setKeySet(rows_alt);
+    }
+}
+
+
+const handleKeyUp= (event: KeyboardEvent)=>{
+
+    if(event.code ==='ShiftLeft' || event.code === 'ShiftRight'){
+        setKeySet(rows)
+    }
+    
+}
 
 
     if(loading){
