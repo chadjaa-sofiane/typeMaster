@@ -1,6 +1,6 @@
 import React from "react";
 import Keyboard from "src/components/keyboard";
-import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 
 function CharacterPractice() {
