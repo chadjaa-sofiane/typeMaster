@@ -57,5 +57,12 @@ export const generatedSentenceSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { generateSentence, setFeedback, incrementTotal, incrementCorrect, incrementCurrentIndex, pushCurrentTyped, pushCorrectChars} = generatedSentenceSlice.actions
+export const { generateSentence,
+   setFeedback,
+    incrementTotal,
+     incrementCorrect,
+      incrementCurrentIndex,
+       pushCurrentTyped,
+        pushCorrectChars,
+         reset} = generatedSentenceSlice.actions
 export default generatedSentenceSlice.reducer

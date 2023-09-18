@@ -1,10 +1,14 @@
 import React from 'react';
 import {useEffect} from 'react';
 import { RootState } from 'src/redux/store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Keyboard from 'src/components/keyboard';
+import { reset } from 'src/redux/generatedSentenceSlice';
 
 function SentencePractice() {
+
+    const dispatch = useDispatch();
+
     const generatedSentence = useSelector(
         (state: RootState) => state.generatedSentence.value
     );
@@ -27,6 +31,10 @@ function SentencePractice() {
             return accumulator;
         }
     }
+
+    useEffect(()=>{
+        dispatch(reset());
+    },[]);
 
     return (
         <div className="h-[calc(100vh-3rem)] flex flex-col justify-between items-center p-12 bg-primary-light">
