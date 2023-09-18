@@ -18,6 +18,15 @@ function SentencePractice() {
     const currentIndex = useSelector((state: RootState) => state.generatedSentence.currentIndex);
     const currentTyped = useSelector((state: RootState) => state.generatedSentence.currentTyped);
     const correctChars = useSelector((state: RootState) => state.generatedSentence.correctChars);
+    
+    const accuracyReducer = (accumulator: number, currentValue: boolean)=>{
+        if(currentValue === true){
+            return accumulator + 1;
+        }
+        else{
+            return accumulator;
+        }
+    }
 
     return (
         <div className="h-[calc(100vh-3rem)] flex flex-col justify-between items-center p-12 bg-primary-light">
@@ -35,7 +44,10 @@ function SentencePractice() {
                         }
                     </span>
                 </div>
-                <span className='bg-secondary p-12 border border-primary rounded-2xl text-3xl'>Score: {correct}/{total}</span>
+                <span className='bg-secondary p-12 border border-primary rounded-2xl text-3xl'>
+                Accuracy: {[...currentTyped].length > 0 && correctChars.reduce(accuracyReducer, 0)/[...currentTyped].length}
+                {[...currentTyped].length === 0 && 0}
+                </span>
             </div>
 
             <div className="p-28">

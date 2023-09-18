@@ -45,6 +45,13 @@ export const generatedSentenceSlice = createSlice({
     },
     pushCorrectChars: (state, action: PayloadAction<boolean>)=>{
       state.correctChars = [...state.correctChars, action.payload]
+    },
+    reset: (state)=>{
+      state.total = 0;
+      state.correct = 0;
+      state.currentIndex = 0;
+      state.currentTyped = "";
+      state.correctChars = [];
     }
   },
 })

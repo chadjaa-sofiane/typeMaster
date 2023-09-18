@@ -118,7 +118,12 @@ const Key = ({keychar}: KeyProps) => {
         if(event.key === keychar || event.code === keychar){
             dispatch(incrementTotal());
             dispatch(incrementCurrentIndex());
-            dispatch(pushCurrentTyped(keychar));
+            if(keychar === 'Space'){
+                dispatch(pushCurrentTyped(' '));
+            }
+            else{
+                dispatch(pushCurrentTyped(keychar));
+            }
             setIsDown(true);
             if(generatedChar === keychar){
                 setIsCorrect(true);
