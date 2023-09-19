@@ -6,11 +6,14 @@ import Keyboard from "src/components/keyboard";
 import { reset } from "src/redux/generatedSentenceSlice";
 import { generateSentence } from "src/redux/generatedSentenceSlice";
 import { ClipLoader } from "react-spinners";
+import TagsInput from 'react-tagsinput'
 
 function SentencePractice() {
     const dispatch = useDispatch();
-    const [generatedSentenceLoading, setGeneratedSentenceLoading] =
-        useState(true);
+    
+    const [generatedSentenceLoading, setGeneratedSentenceLoading] = useState(true);
+    const [keywords, setKeywords] = useState([]);
+
     const generatedSentence = useSelector(
         (state: RootState) => state.generatedSentence.value
     );
@@ -42,6 +45,7 @@ function SentencePractice() {
     };
     const init = async () => {
         dispatch(reset());
+        setGeneratedSentenceLoading(true);
         const queryOptions = {
             method: "POST",
             headers: {
@@ -51,7 +55,7 @@ function SentencePractice() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                prompt: "generate text with the following keywords: javascript code",
+                prompt: `generate text with the following keywords: ${keywords.join(' ')}`,
                 params: {
                     n: 1,
                     frmtadsnsp: false,
@@ -100,6 +104,7 @@ function SentencePractice() {
         const resParsed = await res.json();
         console.log(resParsed);
         console.log(resParsed.id);
+        console.log(JSON.parse(queryOptions.body));
         let generationRes = await fetch(
             `https://stablehorde.net/api/v2/generate/text/status/${resParsed.id}`,
             generationOptions
@@ -123,11 +128,22 @@ function SentencePractice() {
     }, []);
 
     return (
-        <div className="h-[calc(100vh-3rem)] flex flex-col justify-between items-center p-12 bg-primary-light">
-            <div className="flex flex-col justify-stretch items-center gap-3">
-                <span className="bg-secondary p-12 border border-primary rounded-2xl text-3xl w-full">
+        <div className="h-[calc(100vh-3rem)] flex flex-col justify-between items-center p-10 bg-primary-light">
+            <div className="flex flex-col justify-stretch items-center gap-3 w-2/3">
+                <span className="bg-secondary py-3 px-12 border border-primary rounded-2xl text-3xl w-full">
                     Welcome to Sentence practice !
                 </span>
+                <div className="flex flex-col">
+                    <span>Write some keywords to help generate suitable text</span>
+                    <div className="flex gap-2">
+                        <div className="grow">
+                            <TagsInput value={keywords} onChange={(tags: string[])=> setKeywords(tags)}/>
+                        </div>
+                        <button
+                        className="bg-secondary py-2 px-3 border border-primary rounded-2xl"
+                         onClick={()=>init()}><span>Generate</span></button>
+                    </div>
+                </div>
                 <div className="flex gap-2">
                     <span className="bg-secondary p-12 border border-primary rounded-2xl text-3xl">
                         {generatedSentenceLoading ? (
