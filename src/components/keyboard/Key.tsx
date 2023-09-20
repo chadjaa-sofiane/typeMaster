@@ -39,7 +39,7 @@ const Key = ({keychar}: KeyProps) => {
     const dispatch = useDispatch();
 
     // will set the size of the keyboard
-    const [fontSize, setFontSize] = useState('lg');
+    const [fontSize, setFontSize] = useState('md');
     const special_keys =   qwertyLayout["special_keys_first"].flat(1)
                    .concat(qwertyLayout["special_keys_last"].flat(1))
                    .concat(qwertyLayout["last_row"])

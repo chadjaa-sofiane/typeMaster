@@ -6,12 +6,14 @@ import Keyboard from "src/components/keyboard";
 import { reset } from "src/redux/generatedSentenceSlice";
 import { generateSentence } from "src/redux/generatedSentenceSlice";
 import { ClipLoader } from "react-spinners";
-import TagsInput from 'react-tagsinput'
+import TagsInput from "react-tagsinput";
+import { spawn } from "child_process";
 
 function SentencePractice() {
     const dispatch = useDispatch();
-    
-    const [generatedSentenceLoading, setGeneratedSentenceLoading] = useState(true);
+
+    const [generatedSentenceLoading, setGeneratedSentenceLoading] =
+        useState(true);
     const [keywords, setKeywords] = useState([]);
 
     const generatedSentence = useSelector(
@@ -55,7 +57,9 @@ function SentencePractice() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                prompt: `generate text with the following keywords: ${keywords.join(' ')}`,
+                prompt: `generate text atleast 2 sentences long with the following keywords: ${keywords.join(
+                    " "
+                )}`,
                 params: {
                     n: 1,
                     frmtadsnsp: false,
@@ -69,7 +73,7 @@ function SentencePractice() {
                     rep_pen_slope: 10,
                     singleline: false,
                     temperature: 0.5,
-                    tfs: 1,
+                    tfs: 0.2,
                     top_a: 1,
                     top_k: 100,
                     top_p: 1,
@@ -133,60 +137,79 @@ function SentencePractice() {
                 <span className="bg-secondary py-3 px-12 border border-primary rounded-2xl text-3xl w-full">
                     Welcome to Sentence practice !
                 </span>
-                <div className="flex flex-col">
-                    <span>Write some keywords to help generate suitable text</span>
-                    <div className="flex gap-2">
-                        <div className="grow">
-                            <TagsInput value={keywords} onChange={(tags: string[])=> setKeywords(tags)}/>
-                        </div>
-                        <button
-                        className="bg-secondary py-2 px-3 border border-primary rounded-2xl"
-                         onClick={()=>init()}><span>Generate</span></button>
-                    </div>
-                </div>
-                <div className="flex gap-2">
-                    <span className="bg-secondary p-12 border border-primary rounded-2xl text-3xl">
-                        {generatedSentenceLoading ? (
-                            <ClipLoader
-                                color={"#900C3F"}
-                                loading={generatedSentenceLoading}
-                                size={150}
-                                aria-label="Loading Spinner"
-                                data-testid="loader"
-                            />
-                        ) : <>
-                                                {[...generatedSentence]
-                            .slice(0, currentIndex)
-                            .map((char, index) => (
-                                <span
-                                    className={`${
-                                        correctChars[index] === true
-                                            ? "bg-green-500"
-                                            : "bg-red-500"
-                                    }`}
-                                >
-                                    {char}
-                                </span>
-                            ))}
-                        {[...generatedSentence]
-                            .slice(currentIndex, generatedSentence.length)
-                            .map((char, index) => (
-                                <span>{char}</span>
-                            ))}
-                        </>}
-
+                <div className="flex">
+                    <span className="bg-secondary p-3 border border-primary rounded-2xl">
+                        Accuracy:{" "}
+                        {[...currentTyped].length > 0 &&
+                            correctChars.reduce(accuracyReducer, 0) /
+                                [...currentTyped].length}
+                        {[...currentTyped].length === 0 && 0}
                     </span>
                 </div>
-                <span className="bg-secondary p-12 border border-primary rounded-2xl text-3xl">
-                    Accuracy:{" "}
-                    {[...currentTyped].length > 0 &&
-                        correctChars.reduce(accuracyReducer, 0) /
-                            [...currentTyped].length}
-                    {[...currentTyped].length === 0 && 0}
-                </span>
+                <div className="flex flex-col">
+                    <span>
+                        Write some keywords to help generate suitable text
+                    </span>
+                    <div className="flex gap-2">
+                        <div className="grow">
+                            <TagsInput
+                                value={keywords}
+                                onChange={(tags: string[]) => setKeywords(tags)}
+                            />
+                        </div>
+                        <button
+                            className="bg-secondary py-2 px-3 border border-primary rounded-2xl"
+                            onClick={() => init()}
+                        >
+                            <span>Generate</span>
+                        </button>
+                    </div>
+                </div>
+                <div className="flex gap-2 w-full justify-center">
+                    <span className="flex justify-center flex-wrap bg-secondary min-h-fit max-h-80 p-2 border border-primary rounded-2xl text-3xl w-full">
+                        <span className="w-full h-full p-2 overflow-y-scroll">
+                            {generatedSentenceLoading ? (
+                                <span className="flex justify-center">
+                                <ClipLoader
+                                    color={"#900C3F"}
+                                    loading={generatedSentenceLoading}
+                                    size={40}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader"
+                                />
+                                </span>
+
+                            ) : (
+                                <>
+                                    {[...generatedSentence]
+                                        .slice(0, currentIndex)
+                                        .map((char, index) => (
+                                            <span
+                                                className={`${
+                                                    correctChars[index] === true
+                                                        ? "bg-green-500"
+                                                        : "bg-red-500"
+                                                }`}
+                                            >
+                                                {char}
+                                            </span>
+                                        ))}
+                                    {[...generatedSentence]
+                                        .slice(
+                                            currentIndex,
+                                            generatedSentence.length
+                                        )
+                                        .map((char, index) => (
+                                            <span>{char}</span>
+                                        ))}
+                                </>
+                            )}
+                        </span>
+                    </span>
+                </div>
             </div>
 
-            <div className="p-28">
+            <div className="p-12">
                 <Keyboard />
             </div>
         </div>

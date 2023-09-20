@@ -74,3 +74,15 @@ body {
     padding: 5px;
     width: 80px;
   }
+
+
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 5px;
+}
