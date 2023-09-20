@@ -7,7 +7,7 @@ function Navbar() {
     const navigate = useNavigate();
 
     return (
-        <div className="w-screen bg-primary h-12 flex justify-between p-2">
+        <div className="w-[calc(100vw - .5rem)] bg-primary h-12 flex justify-between p-2">
             <button
                 onClick={() => {
                     navigate(-1);
