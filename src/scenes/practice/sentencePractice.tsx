@@ -148,8 +148,8 @@ function SentencePractice() {
                     <span className="bg-secondary p-3 border border-primary rounded-2xl">
                         Accuracy:{" "}
                         {[...currentTyped].length > 0 &&
-                            correctChars.reduce(accuracyReducer, 0) /
-                                [...currentTyped].length}
+                            Math.round((correctChars.reduce(accuracyReducer, 0) /
+                                [...currentTyped].length)* 100) / 100}
                         {[...currentTyped].length === 0 && 0}
                     </span>
                 </div>

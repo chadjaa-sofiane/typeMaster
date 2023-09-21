@@ -113,6 +113,12 @@ const Key = ({keychar}: KeyProps) => {
 
     const current_key = special_keys_props.find(obj=>obj.key===keychar)
     const handleKeyDown= (event: KeyboardEvent)=>{
+
+        // this is to prevent spacebar from scrolling the textbox
+            if(event.code === 'Space'){
+                event.preventDefault();
+            }
+
         if(event.repeat){return}
 
         if(event.key === keychar || event.code === keychar){
