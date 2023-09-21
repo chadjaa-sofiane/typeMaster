@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { RootState } from "src/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import Keyboard from "src/components/keyboard";
@@ -11,7 +11,8 @@ import { spawn } from "child_process";
 
 function SentencePractice() {
     const dispatch = useDispatch();
-
+    //div between typed chars and untyped so it always scrolls to the area the user is typing on
+    const splitterRef = useRef(null);
     const [generatedSentenceLoading, setGeneratedSentenceLoading] =
         useState(true);
     const [keywords, setKeywords] = useState([]);
@@ -80,7 +81,7 @@ function SentencePractice() {
                     typical: 1,
                     use_default_badwordsids: true,
                 },
-                softprompt: "string",
+                softprompt: "be formal",
                 trusted_workers: false,
                 slow_workers: true,
                 workers: [
@@ -130,6 +131,12 @@ function SentencePractice() {
     useEffect(() => {
         init();
     }, []);
+
+    useEffect(()=>{ 
+        splitterRef.current?.scrollIntoView({
+            behavior: "smooth"
+        })
+    },[currentIndex])
 
     return (
         <div className="h-[calc(100vh-3rem)] flex flex-col justify-between items-center p-10 bg-primary-light">
@@ -194,6 +201,7 @@ function SentencePractice() {
                                                 {char}
                                             </span>
                                         ))}
+                                        <span ref={splitterRef}></span>
                                     {[...generatedSentence]
                                         .slice(
                                             currentIndex,
