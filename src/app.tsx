@@ -1,5 +1,3 @@
-import React, { Children, StrictMode } from "react";
-import { createRoot } from "react-dom/client";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "src/redux/store";
@@ -33,8 +31,7 @@ const router = createMemoryRouter(
       errorElement: <Error />,
       children: [
         { path: "/practice/character", element: <CharacterPractice /> },
-        { path: "/practice/sentence", element: <SentencePractice/> },
-
+        { path: "/practice/sentence", element: <SentencePractice /> },
       ],
     },
     {
@@ -44,14 +41,17 @@ const router = createMemoryRouter(
     },
   ],
   {
-    initialEntries: ["/", "/practice","/practice/sentence"],
+    initialEntries: ["/", "/practice", "/practice/sentence"],
     initialIndex: 2,
   }
 );
 
-const root = createRoot(document.getElementById("root"));
-root.render(
+const App = () => {
+  return (
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-);
+  );
+};
+
+export default App;
